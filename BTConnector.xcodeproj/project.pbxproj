@@ -8,20 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		AECD3CA52062308F006B47A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CA42062308F006B47A2 /* AppDelegate.swift */; };
-		AECD3CA72062308F006B47A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CA62062308F006B47A2 /* ViewController.swift */; };
 		AECD3CAA2062308F006B47A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AECD3CA82062308F006B47A2 /* Main.storyboard */; };
-		AECD3CAC2062308F006B47A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AECD3CAB2062308F006B47A2 /* Assets.xcassets */; };
 		AECD3CAF2062308F006B47A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AECD3CAD2062308F006B47A2 /* LaunchScreen.storyboard */; };
+		AECD3CBC206237B1006B47A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CBB206237B1006B47A2 /* ViewController.swift */; };
+		AECD3CBF206237BB006B47A2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AECD3CBD206237BB006B47A2 /* Info.plist */; };
+		AECD3CC0206237BB006B47A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AECD3CBE206237BB006B47A2 /* Assets.xcassets */; };
+		AECD3CC2206237FA006B47A2 /* ScanDevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC1206237FA006B47A2 /* ScanDevicesViewController.swift */; };
+		AECD3CC5206245B2006B47A2 /* NSData+Int8.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC3206245B2006B47A2 /* NSData+Int8.swift */; };
+		AECD3CC6206245B2006B47A2 /* SimpleBluetoothIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC4206245B2006B47A2 /* SimpleBluetoothIO.swift */; };
+		AECD3CC820626F97006B47A2 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC720626F97006B47A2 /* SwitchTableViewCell.swift */; };
+		AECD3CCA20627B68006B47A2 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC920627B68006B47A2 /* TimerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AECD3CA12062308F006B47A2 /* BTConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AECD3CA42062308F006B47A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AECD3CA62062308F006B47A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AECD3CA92062308F006B47A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AECD3CAB2062308F006B47A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AECD3CAE2062308F006B47A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		AECD3CB02062308F006B47A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AECD3CBB206237B1006B47A2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AECD3CBD206237BB006B47A2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AECD3CBE206237BB006B47A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AECD3CC1206237FA006B47A2 /* ScanDevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDevicesViewController.swift; sourceTree = "<group>"; };
+		AECD3CC3206245B2006B47A2 /* NSData+Int8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Int8.swift"; sourceTree = "<group>"; };
+		AECD3CC4206245B2006B47A2 /* SimpleBluetoothIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleBluetoothIO.swift; sourceTree = "<group>"; };
+		AECD3CC720626F97006B47A2 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		AECD3CC920627B68006B47A2 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +66,58 @@
 			isa = PBXGroup;
 			children = (
 				AECD3CA42062308F006B47A2 /* AppDelegate.swift */,
-				AECD3CA62062308F006B47A2 /* ViewController.swift */,
 				AECD3CA82062308F006B47A2 /* Main.storyboard */,
-				AECD3CAB2062308F006B47A2 /* Assets.xcassets */,
 				AECD3CAD2062308F006B47A2 /* LaunchScreen.storyboard */,
-				AECD3CB02062308F006B47A2 /* Info.plist */,
+				AECD3CB620623652006B47A2 /* Model */,
+				AECD3CB720623661006B47A2 /* View */,
+				AECD3CB820623673006B47A2 /* Controller */,
+				AECD3CB920623687006B47A2 /* Helper */,
+				AECD3CBA206236DA006B47A2 /* Resources */,
 			);
 			path = BTConnector;
+			sourceTree = "<group>";
+		};
+		AECD3CB620623652006B47A2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AECD3CB720623661006B47A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AECD3CC720626F97006B47A2 /* SwitchTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AECD3CB820623673006B47A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AECD3CBB206237B1006B47A2 /* ViewController.swift */,
+				AECD3CC1206237FA006B47A2 /* ScanDevicesViewController.swift */,
+				AECD3CC920627B68006B47A2 /* TimerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AECD3CB920623687006B47A2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AECD3CC3206245B2006B47A2 /* NSData+Int8.swift */,
+				AECD3CC4206245B2006B47A2 /* SimpleBluetoothIO.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		AECD3CBA206236DA006B47A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AECD3CBD206237BB006B47A2 /* Info.plist */,
+				AECD3CBE206237BB006B47A2 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,8 +180,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AECD3CAF2062308F006B47A2 /* LaunchScreen.storyboard in Resources */,
-				AECD3CAC2062308F006B47A2 /* Assets.xcassets in Resources */,
 				AECD3CAA2062308F006B47A2 /* Main.storyboard in Resources */,
+				AECD3CC0206237BB006B47A2 /* Assets.xcassets in Resources */,
+				AECD3CBF206237BB006B47A2 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +193,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AECD3CA72062308F006B47A2 /* ViewController.swift in Sources */,
+				AECD3CBC206237B1006B47A2 /* ViewController.swift in Sources */,
+				AECD3CC6206245B2006B47A2 /* SimpleBluetoothIO.swift in Sources */,
+				AECD3CC5206245B2006B47A2 /* NSData+Int8.swift in Sources */,
+				AECD3CCA20627B68006B47A2 /* TimerViewController.swift in Sources */,
 				AECD3CA52062308F006B47A2 /* AppDelegate.swift in Sources */,
+				AECD3CC2206237FA006B47A2 /* ScanDevicesViewController.swift in Sources */,
+				AECD3CC820626F97006B47A2 /* SwitchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,9 +337,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BTConnector/Info.plist;
+				DEVELOPMENT_TEAM = 7298V33AA6;
+				INFOPLIST_FILE = "$(SRCROOT)/BTConnector/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = iDev.BTConnector;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroeyezclassroom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -289,9 +353,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BTConnector/Info.plist;
+				DEVELOPMENT_TEAM = 7298V33AA6;
+				INFOPLIST_FILE = "$(SRCROOT)/BTConnector/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = iDev.BTConnector;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroeyezclassroom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
