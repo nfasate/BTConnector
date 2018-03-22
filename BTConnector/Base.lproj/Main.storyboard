@@ -46,7 +46,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A2w-wG-Ars">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="A2w-wG-Ars">
                                                     <rect key="frame" x="316" y="26.5" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="switchValueChanged:" destination="51p-eN-iuV" eventType="valueChanged" id="gm7-b2-zB9"/>
@@ -99,7 +99,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgX-VM-O3X">
                                 <rect key="frame" x="20" y="597" width="335" height="50"/>
-                                <color key="backgroundColor" red="0.41079788065434969" green="0.94759765619999992" blue="0.61218926139127638" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.41176470588235292" green="0.94901960784313721" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0tn-fM-l8n"/>
                                 </constraints>
@@ -113,7 +113,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RH4-ay-Qud">
                                 <rect key="frame" x="0.0" y="637" width="375" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.34290832472423571" blue="0.21605497549395292" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.3411764705882353" blue="0.21568627450980393" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fAC-LJ-WfE"/>
                                 </constraints>
@@ -160,7 +160,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-XA-sVB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32n-kx-8ff">
@@ -244,10 +244,10 @@
                             <constraint firstItem="hFx-5a-B6c" firstAttribute="trailing" secondItem="ctp-XA-sVB" secondAttribute="trailing" id="2xe-Zw-MqU"/>
                             <constraint firstItem="hFx-5a-B6c" firstAttribute="bottom" secondItem="ctp-XA-sVB" secondAttribute="bottom" id="3lC-2G-A6r"/>
                             <constraint firstItem="32n-kx-8ff" firstAttribute="width" secondItem="PNJ-kb-fRN" secondAttribute="width" multiplier="0.8" id="6Id-C9-Vea"/>
+                            <constraint firstItem="ctp-XA-sVB" firstAttribute="top" secondItem="PNJ-kb-fRN" secondAttribute="top" id="9TL-1D-2Oz"/>
                             <constraint firstItem="ctp-XA-sVB" firstAttribute="leading" secondItem="hFx-5a-B6c" secondAttribute="leading" id="CdF-RW-ZyF"/>
                             <constraint firstItem="32n-kx-8ff" firstAttribute="centerX" secondItem="PNJ-kb-fRN" secondAttribute="centerX" id="Vwr-Fj-G5P"/>
                             <constraint firstItem="32n-kx-8ff" firstAttribute="centerY" secondItem="PNJ-kb-fRN" secondAttribute="centerY" id="W8L-zf-cyd"/>
-                            <constraint firstItem="ctp-XA-sVB" firstAttribute="top" secondItem="hFx-5a-B6c" secondAttribute="top" id="ly6-8j-t09"/>
                             <constraint firstItem="32n-kx-8ff" firstAttribute="height" secondItem="PNJ-kb-fRN" secondAttribute="height" multiplier="0.65" id="pW6-bB-J2c"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hFx-5a-B6c"/>
@@ -269,7 +269,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERJ-b1-3dJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTn-aG-bz2">
@@ -343,10 +343,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ERJ-b1-3dJ" firstAttribute="leading" secondItem="GYg-Ut-X8z" secondAttribute="leading" id="21R-17-fao"/>
+                            <constraint firstItem="ERJ-b1-3dJ" firstAttribute="top" secondItem="wup-tX-SK8" secondAttribute="top" id="GDD-e5-KZi"/>
                             <constraint firstItem="bTn-aG-bz2" firstAttribute="centerY" secondItem="wup-tX-SK8" secondAttribute="centerY" id="LEz-bz-QiK"/>
                             <constraint firstItem="bTn-aG-bz2" firstAttribute="centerX" secondItem="wup-tX-SK8" secondAttribute="centerX" id="PXX-WC-c59"/>
                             <constraint firstItem="GYg-Ut-X8z" firstAttribute="bottom" secondItem="ERJ-b1-3dJ" secondAttribute="bottom" id="X5p-Jr-WmV"/>
-                            <constraint firstItem="ERJ-b1-3dJ" firstAttribute="top" secondItem="GYg-Ut-X8z" secondAttribute="top" id="m7i-Z5-tAk"/>
                             <constraint firstItem="bTn-aG-bz2" firstAttribute="width" secondItem="wup-tX-SK8" secondAttribute="width" multiplier="0.85" id="tl6-yl-fob"/>
                             <constraint firstItem="GYg-Ut-X8z" firstAttribute="trailing" secondItem="ERJ-b1-3dJ" secondAttribute="trailing" id="wGA-sX-ELe"/>
                             <constraint firstItem="bTn-aG-bz2" firstAttribute="height" secondItem="wup-tX-SK8" secondAttribute="height" multiplier="0.7" id="ydJ-XZ-xKV"/>

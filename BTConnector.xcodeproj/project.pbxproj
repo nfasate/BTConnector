@@ -18,9 +18,13 @@
 		AECD3CC6206245B2006B47A2 /* SimpleBluetoothIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC4206245B2006B47A2 /* SimpleBluetoothIO.swift */; };
 		AECD3CC820626F97006B47A2 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC720626F97006B47A2 /* SwitchTableViewCell.swift */; };
 		AECD3CCA20627B68006B47A2 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECD3CC920627B68006B47A2 /* TimerViewController.swift */; };
+		EC9F1F686D5BDFB30BBC3F10 /* Pods_BTConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1DB5FD8542D4C3B3F121BD /* Pods_BTConnector.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D1DB5FD8542D4C3B3F121BD /* Pods_BTConnector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BTConnector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33EF813B5EB4CA55D547AF29 /* Pods-BTConnector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTConnector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BTConnector/Pods-BTConnector.debug.xcconfig"; sourceTree = "<group>"; };
+		409496853401C50AA3878EBA /* Pods-BTConnector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTConnector.release.xcconfig"; path = "Pods/Target Support Files/Pods-BTConnector/Pods-BTConnector.release.xcconfig"; sourceTree = "<group>"; };
 		AECD3CA12062308F006B47A2 /* BTConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AECD3CA42062308F006B47A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AECD3CA92062308F006B47A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,17 +44,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC9F1F686D5BDFB30BBC3F10 /* Pods_BTConnector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06785D2D7460D357C641606A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1D1DB5FD8542D4C3B3F121BD /* Pods_BTConnector.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97CE4903B7F6E1CFB6EE50C2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				33EF813B5EB4CA55D547AF29 /* Pods-BTConnector.debug.xcconfig */,
+				409496853401C50AA3878EBA /* Pods-BTConnector.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AECD3C982062308F006B47A2 = {
 			isa = PBXGroup;
 			children = (
 				AECD3CA32062308F006B47A2 /* BTConnector */,
 				AECD3CA22062308F006B47A2 /* Products */,
+				97CE4903B7F6E1CFB6EE50C2 /* Pods */,
+				06785D2D7460D357C641606A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,9 +151,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AECD3CB32062308F006B47A2 /* Build configuration list for PBXNativeTarget "BTConnector" */;
 			buildPhases = (
+				FAB27DF0E42E7A788A9D73FD /* [CP] Check Pods Manifest.lock */,
 				AECD3C9D2062308F006B47A2 /* Sources */,
 				AECD3C9E2062308F006B47A2 /* Frameworks */,
 				AECD3C9F2062308F006B47A2 /* Resources */,
+				F9DAE8949290706D8ED9D38B /* [CP] Embed Pods Frameworks */,
+				32A77749B6AA487394BB32BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -153,6 +180,11 @@
 					AECD3CA02062308F006B47A2 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -187,6 +219,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32A77749B6AA487394BB32BB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BTConnector/Pods-BTConnector-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9DAE8949290706D8ED9D38B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BTConnector/Pods-BTConnector-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BTConnector/Pods-BTConnector-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAB27DF0E42E7A788A9D73FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BTConnector-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AECD3C9D2062308F006B47A2 /* Sources */ = {
@@ -334,6 +420,7 @@
 		};
 		AECD3CB42062308F006B47A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33EF813B5EB4CA55D547AF29 /* Pods-BTConnector.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -350,6 +437,7 @@
 		};
 		AECD3CB52062308F006B47A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 409496853401C50AA3878EBA /* Pods-BTConnector.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

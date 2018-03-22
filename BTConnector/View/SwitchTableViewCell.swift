@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SwitchTableCellDelegate: class {
-    func didTapTimer(_ row: Int)
+    func didTapTimer(_ row: Int, isTimerOn: Bool)
     func switchValueChanged(_ row: Int, isOn: Bool)
 }
 
@@ -38,7 +38,14 @@ class SwitchTableViewCell: UITableViewCell {
     }
     
     @IBAction func timerBtnTapped(_ sender: UIButton) {
-        delegate?.didTapTimer(sender.tag)
+        if sender.tintColor != UIColor(red:1.00, green:0.34, blue:0.22, alpha:0.9) {
+            //sender.tintColor = UIColor.red
+            delegate?.didTapTimer(sender.tag, isTimerOn: true)
+        }else {
+            //stop timer hereß
+            sender.tintColor = UIColor(red:0.41, green:0.95, blue:0.61, alpha:1.0)
+            delegate?.didTapTimer(sender.tag, isTimerOn: false)
+        }
     }
     
 }

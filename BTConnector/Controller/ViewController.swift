@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class ViewController: UIViewController {
 
@@ -19,10 +20,16 @@ class ViewController: UIViewController {
     var switchesArray = ["Switch 1", "Switch 2", "Switch 3", "Switch 4", "Switch 5","Switch 6", "Switch 7", "Switch 8"]
     var timerArray = ["", "", "", "", "", "", "", ""]
     
+    //var activityIndicatorView: NVActivityIndicatorView?
+    var activityData:ActivityData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presentActivityIndicator()
+    NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData!)
         simpleBluetoothIO = SimpleBluetoothIO(serviceUUID: "19B10010-E8F2-537E-4F6C-D104768A1214", delegate: self)
-        actionTableView.isHidden = true
+        simpleBluetoothIO.target = self
+        //actionTableView.isHidden = true
         dissconnectBtn.isHidden = true
         getStoredArray()
     }
@@ -79,6 +86,16 @@ class ViewController: UIViewController {
         simpleBluetoothIO.disconnectPeripheral()
     }
     
+    func presentActivityIndicator() {
+        //let frame = CGRect(x: self.view.frame.width/2 - 50, y: self.view.frame.height/2 - 50, width: 100, height: 100)
+        //activityIndicatorView = NVActivityIndicatorView(frame: frame, type: NVActivityIndicatorType.ballScaleMultiple, color: UIColor.green, padding: 20)
+        //self.view.addSubview(activityIndicatorView!)
+        
+        let size = CGSize(width: 100, height: 100)
+        activityData = ActivityData(size: size, message: "", messageFont: UIFont(name: "Georgia", size: 20.0)!, messageSpacing: 5, type: NVActivityIndicatorType.ballScaleMultiple, color: UIColor.green, padding: 20, displayTimeThreshold: 20, minimumDisplayTime: 20, backgroundColor: UIColor.clear, textColor: UIColor(red:1.00, green:0.34, blue:0.22, alpha:0.9))
+        
+        //activityIndicatorView?.startAnimating()
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -96,6 +113,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.timerLbl.tag = indexPath.row
         cell.switchBtn.tag = indexPath.row
         
+        if cell.timerLbl.text != "" {
+            cell.timerBtn.tintColor = UIColor(red:1.00, green:0.34, blue:0.22, alpha:0.9)
+        }else {
+            cell.timerBtn.tintColor = UIColor(red:0.41, green:0.95, blue:0.61, alpha:1.0)
+        }
+        
         return cell
     }
     
@@ -106,8 +129,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ViewController: SimpleBluetoothIODelegate {
+    func didDiscoverFailed() {
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+    }
+    
     
     func didConnectToPeripheral(peripheralName: String) {
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         actionTableView.isHidden = false
         dissconnectBtn.isHidden = false
         connectBtn.isHidden = true
@@ -118,6 +146,7 @@ extension ViewController: SimpleBluetoothIODelegate {
     }
     
     func didDisconnectFromPeripheral() {
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         actionTableView.isHidden = true
         dissconnectBtn.isHidden = true
         connectBtn.isHidden = false
@@ -128,6 +157,8 @@ extension ViewController: SimpleBluetoothIODelegate {
     
     func getDiscoverPeripheral(items: [String : [String : Any]]) {
         self.items = items
+        //activityIndicatorView?.stopAnimating()
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
     
     func simpleBluetoothIO(simpleBluetoothIO: SimpleBluetoothIO, didReceiveValue value: Int8) {
@@ -137,11 +168,14 @@ extension ViewController: SimpleBluetoothIODelegate {
             view.backgroundColor = UIColor.black
         }
     }
+    
+    
 }
 
 extension ViewController: ScanDevicesDelegate {
     func didSelectScanDevice(deviceName: String) {
         print(deviceName)
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData!)
         simpleBluetoothIO.didConnect(peripheralName: deviceName)
     }
 }
@@ -175,13 +209,18 @@ extension ViewController: SwitchTableCellDelegate {
         }
     }
     
-    func didTapTimer(_ row: Int) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let timerController = storyboard.instantiateViewController(withIdentifier: "TimerViewController") as! TimerViewController
-        timerController.modalPresentationStyle = .overCurrentContext
-        timerController.indexRow = row
-        timerController.delegate = self
-        self.present(timerController, animated: true, completion: nil)
+    func didTapTimer(_ row: Int, isTimerOn: Bool) {
+        if isTimerOn == true {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let timerController = storyboard.instantiateViewController(withIdentifier: "TimerViewController") as! TimerViewController
+            timerController.modalPresentationStyle = .overCurrentContext
+            timerController.indexRow = row
+            timerController.delegate = self
+            self.present(timerController, animated: true, completion: nil)
+        }else {
+            timerArray[row] = ""
+            actionTableView.reloadData()
+        }
     }
 }
 
@@ -189,5 +228,13 @@ extension ViewController: TimerViewControllerDelegate {
     func didStartTimer(hour: Int, min: Int, row: Int) {
         timerArray[row] = "\(hour):\(min):00"
         actionTableView.reloadData()
+    }
+    
+    func didDismissController(_ row: Int) {
+        let indexPath = IndexPath(row: row, section: 0)
+        if let cell = actionTableView.cellForRow(at: indexPath) as? SwitchTableViewCell {
+            cell.timerBtn.tintColor = UIColor(red:0.41, green:0.95, blue:0.61, alpha:1.0)
+        }
+        
     }
 }

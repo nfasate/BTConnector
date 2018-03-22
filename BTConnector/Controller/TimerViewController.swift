@@ -10,6 +10,7 @@ import UIKit
 
 protocol TimerViewControllerDelegate: class {
     func didStartTimer(hour: Int, min: Int, row: Int)
+    func didDismissController(_ row: Int)
 }
 
 class TimerViewController: UIViewController {
@@ -33,11 +34,28 @@ class TimerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func showAlert(with mTitle:String, message:String) {
+        let alertContoller = UIAlertController(title: mTitle, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            
+        }
+        
+        alertContoller.addAction(okAction)
+        
+        self.present(alertContoller, animated: true, completion: nil)
+    }
+    
     @IBAction func dismissController(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        delegate?.didDismissController(indexRow!)
     }
     
     @IBAction func startTimerBtnTapped(_ sender: UIButton) {
+        if hour == 0, min == 0 {
+            showAlert(with: "Error in selecting time", message: "Please select proper time")
+            return
+        }
         delegate?.didStartTimer(hour: hour, min: min, row: indexRow!)
         self.dismiss(animated: true, completion: nil)
     }

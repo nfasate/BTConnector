@@ -1,10 +1,12 @@
 import CoreBluetooth
+import UIKit
 
 protocol SimpleBluetoothIODelegate: class {
     func simpleBluetoothIO(simpleBluetoothIO: SimpleBluetoothIO, didReceiveValue value: Int8)
     func getDiscoverPeripheral(items: [String: [String: Any]])
     func didConnectToPeripheral(peripheralName: String)
     func didDisconnectFromPeripheral()
+    func didDiscoverFailed()
 }
 
 class SimpleBluetoothIO: NSObject {
@@ -17,14 +19,16 @@ class SimpleBluetoothIO: NSObject {
     var targetService: CBService?
     var writableCharacteristic: CBCharacteristic?
     var items = [String: [String: Any]]()
+    var target:UIViewController?
     
     init(serviceUUID: String, delegate: SimpleBluetoothIODelegate?) {
         self.serviceUUID = serviceUUID
         self.delegate = delegate
 
         super.init()
-
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+        let opts = [CBCentralManagerOptionShowPowerAlertKey: true]
+        //centralManager = CBCentralManager(delegate: self, queue: nil)
+        centralManager = CBCentralManager(delegate: self, queue: nil, options: opts)
     }
 
     func writeValue(value: String) {
@@ -94,6 +98,27 @@ extension SimpleBluetoothIO: CBCentralManagerDelegate {
         if central.state == .poweredOn {
             //centralManager.scanForPeripherals(withServices: [CBUUID(string: serviceUUID)], options: nil)
             centralManager.scanForPeripherals(withServices: nil, options: nil)
+        }else {
+            switch central.state {
+            case .poweredOff:
+                print("powerOff")
+                showAlert(with: "No Bluetooth Connection", message: "Bluetooth is currently powered off , powered ON first.")
+                
+            case .resetting:
+                print("resetting")
+                showAlert(with: "Update imminent", message: "The connection with the system service was momentarily lost, update imminent.")
+            case .unauthorized:
+                print("unauthorized")
+                showAlert(with: "Weak Bluetooth Connection", message: "The app is not authorized to use Bluetooth Low Energy.")
+            case .unsupported:
+                print("unsupported")
+                showAlert(with: "Unsupported", message: "The platform doesn't support Bluetooth Low Energy.")
+            case .unknown:
+                print("unknown")
+                showAlert(with: "State unknown, update imminent.", message: "Unknown state")
+            default:
+               break
+            }
         }
     }
     
@@ -102,6 +127,31 @@ extension SimpleBluetoothIO: CBCentralManagerDelegate {
             delegate?.didDisconnectFromPeripheral()
             UserDefaults.standard.removeObject(forKey: "DeviceUUID")
         }
+    }
+    
+    func showAlert(with aTitle: String, message: String) {
+        delegate?.didDiscoverFailed()
+        let alertContoller = UIAlertController(title: aTitle, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            if aTitle == "No Bluetooth Connection" {
+                self.openBluetooth()
+            }
+        }
+        
+        alertContoller.addAction(okAction)
+        
+        target?.present(alertContoller, animated: true, completion: nil)
+        
+    }
+    
+    func openBluetooth(){
+        let url = URL(string: "App-Prefs:root=Bluetooth") //for bluetooth setting
+        let app = UIApplication.shared
+        app.open(url!, options: [:]) { (success) in
+            
+        }
+        //app.openURL(url!)
     }
 }
 
