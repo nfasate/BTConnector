@@ -32,7 +32,7 @@ class ScanDevicesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //manager = CBCentralManager(delegate: self, queue: nil)
+        manager = CBCentralManager(delegate: self, queue: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,44 +85,44 @@ extension ScanDevicesViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-//extension ScanDevicesViewController: CBCentralManagerDelegate, CBPeripheralDelegate {
-//    
-//    func centralManagerDidUpdateState(_ central: CBCentralManager){
-//        if central.state == .poweredOn{
-//            manager.scanForPeripherals(withServices: nil, options: nil)
-//        }
-//    }
-//    
-//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
-//        
-//        didReadPeripheral(peripheral, rssi: RSSI)
-//    }
-//    
-//    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-//        
-//        didReadPeripheral(peripheral, rssi: RSSI)
-//        
-//        delay(scanningDelay){
-//            peripheral.readRSSI()
-//        }
-//    }
-//    
-//    func didReadPeripheral(_ peripheral: CBPeripheral, rssi: NSNumber){
-//        
-//        if let name = peripheral.name{
-//            
-//            items[name] = [
-//                "name":name,
-//                "rssi":rssi
-//            ]
-//        }
-//        devicesTableView.reloadData()
-//    }
-//    
-//    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral){
-//        peripheral.readRSSI()
-//    }
-//}
+extension ScanDevicesViewController: CBCentralManagerDelegate, CBPeripheralDelegate {
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager){
+        if central.state == .poweredOn{
+            manager.scanForPeripherals(withServices: nil, options: nil)
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
+        
+        didReadPeripheral(peripheral, rssi: RSSI)
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        
+        didReadPeripheral(peripheral, rssi: RSSI)
+        
+        delay(scanningDelay){
+            peripheral.readRSSI()
+        }
+    }
+    
+    func didReadPeripheral(_ peripheral: CBPeripheral, rssi: NSNumber){
+        
+        if let name = peripheral.name{
+            
+            items[name] = [
+                "name":name,
+                "rssi":rssi
+            ]
+        }
+        devicesTableView.reloadData()
+    }
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral){
+        peripheral.readRSSI()
+    }
+}
 
 func delay(_ delay:Double, closure:@escaping ()->()) {
     DispatchQueue.main.asyncAfter(

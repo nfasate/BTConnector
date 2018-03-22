@@ -18,18 +18,17 @@ class ViewController: UIViewController {
     var simpleBluetoothIO: SimpleBluetoothIO!
     var items = [String: [String: Any]]()
     var switchesArray = ["Switch 1", "Switch 2", "Switch 3", "Switch 4", "Switch 5","Switch 6", "Switch 7", "Switch 8"]
-    var timerArray = ["", "", "", "", "", "", "", ""]
-    
+    var timerArray: [String] = Array(repeating: "", count: 8)
     //var activityIndicatorView: NVActivityIndicatorView?
     var activityData:ActivityData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presentActivityIndicator()
-    NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData!)
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData!)
         simpleBluetoothIO = SimpleBluetoothIO(serviceUUID: "19B10010-E8F2-537E-4F6C-D104768A1214", delegate: self)
         simpleBluetoothIO.target = self
-        //actionTableView.isHidden = true
+        actionTableView.isHidden = true
         dissconnectBtn.isHidden = true
         getStoredArray()
     }
@@ -57,10 +56,13 @@ class ViewController: UIViewController {
         
         let confirmAction = UIAlertAction(title: "Confirm the modification", style: .destructive, handler: {(_ action: UIAlertAction) -> Void in
             print("New Title \(String(describing: alertController.textFields?[0].text))")
-            self.switchesArray[indexPath.row] = (alertController.textFields?[0].text)!
-            let defaults = UserDefaults.standard
-            defaults.set(self.switchesArray, forKey: "SavedSwitchesArray")
-            self.actionTableView.reloadData()
+            
+            if alertController.textFields?[0].text != "" {
+                self.switchesArray[indexPath.row] = (alertController.textFields?[0].text)!
+                let defaults = UserDefaults.standard
+                defaults.set(self.switchesArray, forKey: "SavedSwitchesArray")
+                self.actionTableView.reloadData()
+            }
         })
         
         alertController.addAction(confirmAction)
@@ -71,6 +73,16 @@ class ViewController: UIViewController {
         
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlert(aTitle: String, aMessage: String) {
+        let alertController = UIAlertController(title: aTitle, message: aMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func connectBtnTapped(_ sender: UIButton) {
@@ -92,7 +104,7 @@ class ViewController: UIViewController {
         //self.view.addSubview(activityIndicatorView!)
         
         let size = CGSize(width: 100, height: 100)
-        activityData = ActivityData(size: size, message: "", messageFont: UIFont(name: "Georgia", size: 20.0)!, messageSpacing: 5, type: NVActivityIndicatorType.ballScaleMultiple, color: UIColor.green, padding: 20, displayTimeThreshold: 20, minimumDisplayTime: 20, backgroundColor: UIColor.clear, textColor: UIColor(red:1.00, green:0.34, blue:0.22, alpha:0.9))
+        activityData = ActivityData(size: size, message: "Please wait while connecting", messageFont: UIFont(name: "Georgia", size: 20.0)!, messageSpacing: 5, type: NVActivityIndicatorType.ballScaleMultiple, color: UIColor.green, padding: 20, displayTimeThreshold: 20, minimumDisplayTime: 20, backgroundColor: UIColor.clear, textColor: UIColor(red:1.00, green:0.34, blue:0.22, alpha:0.9))
         
         //activityIndicatorView?.startAnimating()
     }
@@ -129,43 +141,53 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ViewController: SimpleBluetoothIODelegate {
+    
+    func didFailToConnect(_ peripheralName: String) {
+        connectBtn.setTitle("Connect", for: .normal)
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        showAlert(aTitle: "Connection invalid", aMessage: "\(peripheralName) not able to connect, please try with another bluetooth device")
+    }
+    
     func didDiscoverFailed() {
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
     
-    
     func didConnectToPeripheral(peripheralName: String) {
+        connectBtn.setTitle("Connect", for: .normal)
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         actionTableView.isHidden = false
         dissconnectBtn.isHidden = false
         connectBtn.isHidden = true
-        switchesArray = ["Switch 1", "Switch 2", "Switch 3", "Switch 4", "Switch 5","Switch 6", "Switch 7", "Switch 8"]
-        timerArray = ["", "", "", "", "", "", "", ""]
-        
+        timerArray = Array(repeating: "", count: 8)
         actionTableView.reloadData()
     }
     
     func didDisconnectFromPeripheral() {
+        connectBtn.setTitle("Connect", for: .normal)
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         actionTableView.isHidden = true
         dissconnectBtn.isHidden = true
         connectBtn.isHidden = false
-        switchesArray = ["Switch 1", "Switch 2", "Switch 3", "Switch 4", "Switch 5","Switch 6", "Switch 7", "Switch 8"]
-        timerArray = ["", "", "", "", "", "", "", ""]
+        timerArray = Array(repeating: "", count: 8)
         actionTableView.reloadData()
     }
     
     func getDiscoverPeripheral(items: [String : [String : Any]]) {
         self.items = items
         //activityIndicatorView?.stopAnimating()
-        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        if let deviceUUID = UserDefaults.standard.value(forKey: "DeviceUUID") as? String {
+            print(deviceUUID)
+            connectBtn.setTitle("Connecting...", for: .normal)
+        }else {
+            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        }
     }
     
     func simpleBluetoothIO(simpleBluetoothIO: SimpleBluetoothIO, didReceiveValue value: Int8) {
         if value > 0 {
-            view.backgroundColor = UIColor.yellow
+            //view.backgroundColor = UIColor.yellow
         } else {
-            view.backgroundColor = UIColor.black
+            //view.backgroundColor = UIColor.black
         }
     }
     
@@ -175,6 +197,7 @@ extension ViewController: SimpleBluetoothIODelegate {
 extension ViewController: ScanDevicesDelegate {
     func didSelectScanDevice(deviceName: String) {
         print(deviceName)
+        connectBtn.setTitle("Connecting...", for: .normal)
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData!)
         simpleBluetoothIO.didConnect(peripheralName: deviceName)
     }

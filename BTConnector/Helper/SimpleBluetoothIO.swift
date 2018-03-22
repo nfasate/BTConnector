@@ -7,6 +7,7 @@ protocol SimpleBluetoothIODelegate: class {
     func didConnectToPeripheral(peripheralName: String)
     func didDisconnectFromPeripheral()
     func didDiscoverFailed()
+    func didFailToConnect(_ peripheralName: String)
 }
 
 class SimpleBluetoothIO: NSObject {
@@ -20,6 +21,7 @@ class SimpleBluetoothIO: NSObject {
     var writableCharacteristic: CBCharacteristic?
     var items = [String: [String: Any]]()
     var target:UIViewController?
+    var isDisconnect = false
     
     init(serviceUUID: String, delegate: SimpleBluetoothIODelegate?) {
         self.serviceUUID = serviceUUID
@@ -62,6 +64,7 @@ class SimpleBluetoothIO: NSObject {
                 connectedPeripheral = peripheral
                 if let connectedPeripheral = connectedPeripheral {
                     connectedPeripheral.delegate = self
+                    isDisconnect = false
                     centralManager.connect(connectedPeripheral, options: nil)
                 }
                 centralManager.stopScan()
@@ -74,6 +77,7 @@ class SimpleBluetoothIO: NSObject {
         guard let peripheral = connectedPeripheral else {
             return
         }
+        isDisconnect = true
         centralManager.cancelPeripheralConnection(peripheral)
     }
 }
@@ -92,12 +96,20 @@ extension SimpleBluetoothIO: CBCentralManagerDelegate {
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         didReadPeripheral(peripheral, rssi: RSSI)
+        
+        if let deviceUUID = UserDefaults.standard.value(forKey: "DeviceUUID") as? String, deviceUUID == "\(peripheral.identifier)" {
+            print("UUID : \(deviceUUID)")
+            didConnect(peripheralName: peripheral.name!)
+        }
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn {
-            //centralManager.scanForPeripherals(withServices: [CBUUID(string: serviceUUID)], options: nil)
-            centralManager.scanForPeripherals(withServices: nil, options: nil)
+//            if let deviceUUID = UserDefaults.standard.value(forKey: "DeviceUUID") as? String {
+//                centralManager.scanForPeripherals(withServices: [CBUUID(string: deviceUUID)], options: nil)
+//            }else {
+                centralManager.scanForPeripherals(withServices: nil, options: nil)
+//            }
         }else {
             switch central.state {
             case .poweredOff:
@@ -124,9 +136,18 @@ extension SimpleBluetoothIO: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if peripheral.state == .disconnected {
-            delegate?.didDisconnectFromPeripheral()
-            UserDefaults.standard.removeObject(forKey: "DeviceUUID")
+            if isDisconnect {
+                delegate?.didDisconnectFromPeripheral()
+                UserDefaults.standard.removeObject(forKey: "DeviceUUID")
+            }else {
+                didConnect(peripheralName: peripheral.name!)
+            }
         }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("FailToConnect: \(error.debugDescription)")
+        delegate?.didFailToConnect(peripheral.name!)
     }
     
     func showAlert(with aTitle: String, message: String) {
